@@ -11,75 +11,47 @@
     <body>
         <div class="mainMenu">
             <ul class="menu">
-                <li><input type="radio" name="size" value="singleImage" id="size1" checked><label for="size1">Size of single image</label></li>
-                <li><input type="radio" name="size" value="resultImage" id="size2"><label for="size2">Size of result image</label></li>            
-                <li><input type="text" name="size_x" value="300" class="num" id="size_x">px x <input type="text" name="size_y" value="200" class="num" id="size_y">px</li>
+                <li><label><input type="radio" name="size" id="singe" checked>Size of single image</label></li>
+                <li><label><input type="radio" name="size" id="all">Size of result image</label></li>
+                <li><input type="number" value="300" id="sizeX" class="num">px x <input type="number" value="200" id="sizeY" class="num">px</li>
                 <li><hr></li>
-                <li>Rows: <input type="text" class="num" value="2" name="imagesInRow"></li>
-                <li>Columns: <input type="text" class="num" value="4" name="imagesInRow"></li>
+                <li>Columns: <input type="number" value="2" id="cols" class="num"></li>
                 <li><hr></li>
-                <li><input type="radio" name="sort" value="down" id="sort1"><label for="sort1">Down and left</label></li>
-                <li><input type="radio" name="sort" value="left" id="sort2"><label for="sort2">Left and down</label></li>
+                <li><label><input type="radio" name="imageDeform" value="fit" class="imageDeform" checked>Fit in</label></li>
+                <li><label><input type="radio" name="imageDeform" value="deform" class="imageDeform">Deform (stretch)</label></li>
+                <li><label><input type="radio" name="imageDeform" value="crop" class="imageDeform">Crop (remove overflow)</label></li>                
                 <li><hr></li>
-                <li><input type="checkbox" name="labelsToggle" value="1" id="labelsToggle"><label for="labelsToggle">Labels</label></li>
-                <li><input type="radio" name="labels" value="numbers" id="labels1"><label for="labels1">Numbers</label></li>
+                <!--
+                <li><input type="checkbox" name="labelsToggle" value="1" id="labelsToggle" checked><label for="labelsToggle">Labels</label></li>
+                <li><input type="radio" name="labels" value="numbers" id="labels1" checked><label for="labels1">Numbers</label></li>
                 <li><input type="number" name="labelsNumbers" value="1" class="num" id="labels11"><label for="labels11">First number</label></li>
                 <li><input type="radio" name="labels" value="alphabet" id="labels2"><label for="labels2">Alphabet</label></li>
                 <li><input type="text" name="labelsAlphabet" value="A" class="num" id="labels21"><label for="labels21">First letter</label></li>
-                <li><input type="radio" name="labels" value="own" id="labels3"><label for="labels3">Own labels</label></li>
+                <li><input type="radio" name="labels" value="roman" id="labels3"><label for="labels3">Roman numerals</label></li>
+                <li><input type="text" name="labelsRoman" value="I" class="num" id="labels31"><label for="labels31">First number</label></li>
+                <li><input type="radio" name="labels" value="own" id="labels4"><label for="labels4">Own labels</label></li>
                 <li><hr></li>
+                -->
                 <li><input type="file" name="images" id="files" multiple></li>
                 <li><hr></li>
-                <li><input type="button" name="submit" id="draw" value="Create"></li>
+                <li><button id="draw">Generate</button></li>
+                <li><hr></li>
+                <li>
+                    TODO<br>
+                    - bg color<br>
+                    - sorting of images<br>
+                    - crop images<br>                    
+                </li>
             </ul>
+            <div class="imageThumbnails"></div>
         </div>
-        <div class="page">
-            canvas
+        <div id="page" class="page">
+
         </div>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-        <script src="./js/imageMesh.js"></script>
-        <script type="text/javascript">
-            $(function () {
-                //listener to change background image
-                var imageMesh = new ImageMesh();
-                $('#files').on('change', handleImageUpload);
-                $('#draw').on('click', function () {
-                    imageMesh.draw();
-                });
+        <script src="./js/ImageMesh.js"></script>
+        <script src="./js/ImageUpload.js"></script>
+        <script src="./js/Draw.js"></script>        
 
-                function handleImageUpload(evt) {
-                    var files = evt.target.files; // FileList object
-                    var filesCount = files.length;
-                    var filesLoaded = 0;
-                    var returnImages = [];
-                    for (var i in files) {
-                        var f = files[i];
-                        // Only process image files.
-                        if (f.type !== undefined && f.type.match('image.*')) {
-                            var reader = new FileReader();
-                            // Closure to capture the file information.
-                            reader.onload = (function (theFile) {
-                                return function (e) {
-                                    var img = new Image();
-                                    img.src = e.target.result;
-                                    img.onload = function () {
-                                        returnImages.push(this);
-                                        filesLoaded++;
-                                        imageMesh.makeAlert(filesLoaded + "/" + filesCount + " image loaded");
-                                        if (filesLoaded === filesCount) {
-                                            imageMesh.loadImages(returnImages);
-                                        }
-                                    };
-                                };
-                            })(f);
-
-                            // Read in the image file as a data URL.
-                            reader.readAsDataURL(f);
-                        }
-                    }
-                }
-                ;
-            });
-        </script>    
+        <script type="text/javascript">ImageMesh.Start();</script>    
     </body>
 </html>
