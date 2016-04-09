@@ -31,7 +31,7 @@ Draw._images = function () {
     for (var i in ImageMesh.images) {
         var image = ImageMesh.images[i];
         var dimensions = this._processDimensions(i, image.width, image.height);
-        this._context.drawImage(image.img, dimensions.cropY, dimensions.cropX, dimensions.cropW, dimensions.cropH, dimensions.y, dimensions.x, dimensions.width, dimensions.height);
+        this._context.drawImage(image.img, dimensions.cropX, dimensions.cropY, dimensions.cropW, dimensions.cropH, dimensions.x, dimensions.y, dimensions.width, dimensions.height);
     }
 };
 
@@ -46,9 +46,11 @@ Draw._processDimensions = function (num, origWidth, origHeight) {
     var cellTop = Math.floor(num / ImageMesh.settings.columns) * ImageMesh.settings.cellHeigth;
     var cellLeft = num % ImageMesh.settings.columns * ImageMesh.settings.cellWidth;
     if (ImageMesh.settings.imageDeformationType === "deform") {
+        width = ImageMesh.settings.cellWidth;
+        height = ImageMesh.settings.cellHeigth;
         return {
-            x: cellTop,
-            y: cellLeft,
+            x: cellLeft + left,
+            y: cellTop + top,
             width: ImageMesh.settings.cellWidth,
             height: ImageMesh.settings.cellHeigth,
             cropY: cropY,
@@ -71,35 +73,31 @@ Draw._processDimensions = function (num, origWidth, origHeight) {
         }
         top = Math.round((ImageMesh.settings.cellHeigth - height) / 2);
         left = Math.round((ImageMesh.settings.cellWidth - width) / 2);
-        return {
-            x: cellTop + top,
-            y: cellLeft + left,
-            width: width,
-            height: height,
-            cropY: cropY,
-            cropX: cropX,
-            cropW: cropW,
-            cropH: cropH
-        };
+
     } else if (ImageMesh.settings.imageDeformationType === "crop") {
-        var newWidth = ImageMesh.settings.cellWidth;
-        var newHeight = Math.round(newWidth * height / width);
-        var workWidth = newWidth;
-        var workHeight = newHeight;
-
-        /**
-         * @todo
-         */
-
-        return {
-            x: cellTop + top,
-            y: cellLeft + left,
-            width: width,
-            height: height,
-            cropY: cropY,
-            cropX: cropX,
-            cropW: cropW,
-            cropH: cropH
-        };
+        var newWidth = ImageMesh.settings.cellHeigth * width / height;
+        if (newWidth > ImageMesh.settings.cellWidth) {
+            var delta = origWidth / newWidth;
+            cropX = ((newWidth - ImageMesh.settings.cellWidth) / 2) * delta;
+            cropW = ImageMesh.settings.cellWidth * delta;
+        } else {
+            newWidth = ImageMesh.settings.cellWidth;
+            var newHeight = newWidth * height / width;
+            var delta = origHeight / newHeight;
+            cropY = ((newHeight - ImageMesh.settings.cellHeigth) / 2) * delta;
+            cropH = ImageMesh.settings.cellHeigth * delta;
+        }
+        width = ImageMesh.settings.cellWidth;
+        height = ImageMesh.settings.cellHeigth;
     }
+    return {
+        x: cellLeft + left,
+        y: cellTop + top,
+        width: width,
+        height: height,
+        cropY: cropY,
+        cropX: cropX,
+        cropW: cropW,
+        cropH: cropH
+    };
 };

@@ -21,7 +21,6 @@ ImageMesh.Start = function () {
 
 ImageMesh.listen = function () {
     document.body.addEventListener("change", function () {
-        console.log("I'm drawing");
         Draw.all();
     });
 };
@@ -47,18 +46,18 @@ ImageMesh.loadSettings = function () {
             break;
         }
     }
-    this.settings.columns = document.getElementById("cols").value;
+    this.settings.columns = parseFloat(document.getElementById("cols").value);
     this.settings.rows = Math.ceil(this.images.length / this.settings.columns);
 
     this.settings.sizeInput = document.getElementById("singe").checked ? "single" : "all";
     if (this.settings.sizeInput === "single") {
-        this.settings.cellWidth = document.getElementById("sizeX").value;
-        this.settings.cellHeigth = document.getElementById("sizeY").value;
+        this.settings.cellWidth = parseFloat(document.getElementById("sizeX").value);
+        this.settings.cellHeigth = parseFloat(document.getElementById("sizeY").value);
         this.settings.width = this.settings.columns * this.settings.cellWidth;
         this.settings.height = this.settings.rows * this.settings.cellHeigth;
     } else if (this.settings.sizeInput === "all") {
-        this.settings.width = document.getElementById("sizeX").value;
-        this.settings.height = document.getElementById("sizeY").value;
+        this.settings.width = parseFloat(document.getElementById("sizeX").value);
+        this.settings.height = parseFloat(document.getElementById("sizeY").value);
         this.settings.cellWidth = this.settings.width / this.settings.columns;
         this.settings.cellHeigth = this.settings.height / this.settings.rows;
     } else {
