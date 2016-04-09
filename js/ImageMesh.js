@@ -8,7 +8,13 @@ var ImageMesh = {
         columns: 4,
         rows: 4,
         bgColor: "#FFECB3",
-        imageDeformationType: "fit"
+        imageDeformationType: "fit",
+        labels: {
+            enable: false,
+            first: 0,
+            type: "numbers",
+            fontSize: 30
+        }
     },
     images: []
 };
@@ -21,6 +27,9 @@ ImageMesh.Start = function () {
 
 ImageMesh.listen = function () {
     document.body.addEventListener("change", function () {
+        Draw.all();
+    });
+    document.getElementById("draw").addEventListener("click", function () {
         Draw.all();
     });
 };
@@ -50,6 +59,23 @@ ImageMesh.loadSettings = function () {
     this.settings.rows = Math.ceil(this.images.length / this.settings.columns);
 
     this.settings.bgColor = document.getElementById("color").value;
+
+    this.settings.labels.enable = !!document.getElementById("labelsToggle").checked;
+    this.settings.labels.fontSize = parseInt(document.getElementById("fontSize").value);
+    var types = document.getElementsByClassName("labels");
+    for (var i = 0; i < types.length; i++) {
+        if (types[i].checked) {
+            this.settings.labels.type = types[i].value;
+            switch (types[i].value) {
+                case "numbers":
+                    this.settings.labels.first = document.getElementById("labelsFirstNumber").value;
+                    break;
+                case "alphabet":
+                    this.settings.labels.first = document.getElementById("labelsFirstLetter").value;
+                    break;
+            }
+        }
+    }
 
     this.settings.sizeInput = document.getElementById("singe").checked ? "single" : "all";
     if (this.settings.sizeInput === "single") {

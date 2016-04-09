@@ -2,7 +2,6 @@ var ImageUpload = {};
 
 ImageUpload.listen = function () {
     document.getElementById("files").addEventListener("change", ImageUpload.handle);
-    //this.fakeImages();
 };
 
 ImageUpload.handle = function (evt) {
@@ -26,23 +25,5 @@ ImageUpload.handle = function (evt) {
             // Read in the image file as a data URL.
             reader.readAsDataURL(f);
         }
-    }
-};
-
-ImageUpload.fakeImages = function () {
-    var test = [
-        "action-activate-active-2330098-o.jpg",
-        "alexander-brake-breaks-92694-o.jpg",
-        "converge_school_square_14677_o.jpg",
-        "india-mumbai-skyline-1669515-o.jpg",
-        "round_curved_curve_14742_o.jpg",
-    ];
-    for (var i in test) {
-        var res = test[i];
-        var img = new Image();
-        img.src = "./img/" + res;
-        img.onload = function () {
-            ImageMesh.addImage(this);
-        };
     }
 };

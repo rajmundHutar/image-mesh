@@ -24,21 +24,32 @@ Draw.all = function () {
     this._context.fillRect(0, 0, w, h);
 
     this._images();
-    this._captions();
+
 };
 
 Draw._images = function () {
+    Labels.init();
     for (var i in ImageMesh.images) {
         var image = ImageMesh.images[i];
         var dimensions = this._processDimensions(i, image.width, image.height);
         this._context.drawImage(image.img, dimensions.cropX, dimensions.cropY, dimensions.cropW, dimensions.cropH, dimensions.x, dimensions.y, dimensions.width, dimensions.height);
+        this._captions(dimensions.x, dimensions.y);
     }
 };
 
-Draw._captions = function () {
-    /**
-     * @todo
-     */
+Draw._captions = function (x, y) {
+    if (ImageMesh.settings.labels.enable) {
+        var char = Labels.getNextLabel();
+
+        var font = ImageMesh.settings.labels.fontSize;
+
+        this._context.fillStyle = "white";
+        this._context.fillRect(x, y, 1.66 * font, 1.166 * font);
+        this._context.fillStyle = "black";
+        this._context.font = font + "px Arial";
+        this._context.textAlign = 'center';
+        this._context.fillText(char, x + 0.833 * font, y + 0.933 * font);
+    }
 };
 
 Draw._processDimensions = function (num, origWidth, origHeight) {
@@ -48,16 +59,6 @@ Draw._processDimensions = function (num, origWidth, origHeight) {
     if (ImageMesh.settings.imageDeformationType === "deform") {
         width = ImageMesh.settings.cellWidth;
         height = ImageMesh.settings.cellHeigth;
-        return {
-            x: cellLeft + left,
-            y: cellTop + top,
-            width: ImageMesh.settings.cellWidth,
-            height: ImageMesh.settings.cellHeigth,
-            cropY: cropY,
-            cropX: cropX,
-            cropW: cropW,
-            cropH: cropH
-        };
     } else if (ImageMesh.settings.imageDeformationType === "fit") {
         if (width >= ImageMesh.settings.cellWidth) {
             var newWidth = Math.min(width, ImageMesh.settings.cellWidth);
