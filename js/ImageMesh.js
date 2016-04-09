@@ -49,6 +49,8 @@ ImageMesh.loadSettings = function () {
     this.settings.columns = parseFloat(document.getElementById("cols").value);
     this.settings.rows = Math.ceil(this.images.length / this.settings.columns);
 
+    this.settings.bgColor = document.getElementById("color").value;
+
     this.settings.sizeInput = document.getElementById("singe").checked ? "single" : "all";
     if (this.settings.sizeInput === "single") {
         this.settings.cellWidth = parseFloat(document.getElementById("sizeX").value);
