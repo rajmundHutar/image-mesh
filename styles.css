@@ -12,7 +12,8 @@ body {
     font-size: 100%; 
     line-height: 1; 
     font-family: 'Open Sans', sans-serif; 
-    background-color: #FFB300;
+    background-color: #FBFBE7;
+    color: #052E38;
 }
 
 article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section { display: block; }
@@ -47,11 +48,11 @@ ul.menu li{
     width: 230px;
     height: 100%;
     min-height: 800px;
-    border: 3px solid #FF6F00;
+    border: 3px solid #127466;
     float: left;
     margin: 3px 0px 3px 3px;
     border-radius: 10px 0px 0px 10px;
-    background-color: #FFD54F;
+    background-color: #D1F2D4;
 }
 
 input.num{

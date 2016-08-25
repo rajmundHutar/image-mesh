@@ -7,7 +7,7 @@ var ImageMesh = {
         cellHeigth: 200,
         columns: 4,
         rows: 4,
-        bgColor: "#FFECB3",
+        bgColor: "#FBFBE7",
         imageDeformationType: "fit",
         labels: {
             enable: false,
