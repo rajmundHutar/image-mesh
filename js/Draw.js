@@ -37,7 +37,7 @@ Draw._images = function () {
         var image = ImageMesh.images[i];
         var dimensions = this._processDimensions(i, image.width, image.height);
         this._context.drawImage(image.img, dimensions.cropX, dimensions.cropY, dimensions.cropW, dimensions.cropH, dimensions.x, dimensions.y, dimensions.width, dimensions.height);
-        this._captions(dimensions.x, dimensions.y);
+        this._captions(dimensions.cellLeft, dimensions.cellTop);
     }
 };
 
@@ -103,6 +103,8 @@ Draw._processDimensions = function (num, origWidth, origHeight) {
         cropY: cropY,
         cropX: cropX,
         cropW: cropW,
-        cropH: cropH
+        cropH: cropH,
+        cellLeft: cellLeft,
+        cellTop: cellTop
     };
 };
