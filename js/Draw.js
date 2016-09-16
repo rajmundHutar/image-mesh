@@ -27,6 +27,10 @@ Draw.all = function () {
 
 };
 
+Draw.saveImageAsPng = function(){
+    window.open(this._context.canvas.toDataURL('image/png'));
+};
+
 Draw._images = function () {
     Labels.init();
     for (var i in ImageMesh.images) {

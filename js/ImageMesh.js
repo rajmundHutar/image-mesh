@@ -29,8 +29,8 @@ ImageMesh.listen = function () {
     document.body.addEventListener("change", function () {
         Draw.all();
     });
-    document.getElementById("draw").addEventListener("click", function () {
-        Draw.all();
+    document.getElementById("save").addEventListener("click", function () {
+        Draw.saveImageAsPng();
     });
 };
 
