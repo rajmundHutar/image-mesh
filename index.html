@@ -1,52 +1,78 @@
 <!doctype html>
 <html lang="cs">
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-        <meta name="author" content="rajmund.cz">
-        <title>ImageMesh - rajmund.cz</title>
-        <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
-        <link rel="stylesheet" type="text/css" href="css/styles.css">
-    </head>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="author" content="rajmund.cz">
+    <title>ImageMesh - rajmund.cz</title>
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="css/styles.css">
+</head>
 
-    <body>
-        <div class="mainMenu">
-            <ul class="menu">
-                <li>Add some images to create grid</li>
-                <li><hr></li>
-                <li><input type="file" name="images" id="files" multiple></li>
-                <li><hr></li>
-                <li><label><input type="radio" name="size" id="singe" checked>Size of single image</label></li>
-                <li><label><input type="radio" name="size" id="all">Size of result image</label></li>
-                <li><input type="number" value="300" id="sizeX" class="num">px x <input type="number" value="300" id="sizeY" class="num">px</li>
-                <li><hr></li>
-                <li><label>Columns: <input type="number" value="3" id="cols" class="num"></label></li>
-                <li><hr></li>
-                <li><label><input type="radio" name="imageDeform" value="fit" class="imageDeform" checked>Fit in</label></li>
-                <li><label><input type="radio" name="imageDeform" value="deform" class="imageDeform">Deform (stretch)</label></li>
-                <li><label><input type="radio" name="imageDeform" value="crop" class="imageDeform">Crop (remove overflow)</label></li>                
-                <li><hr></li>
-                <li><label>Background color: <input type="color" id="color" value='#FBFBE7'></label></li>
-                <li><hr></li>
-                <li><label><input type="checkbox" id="labelsToggle" checked>Labels</label></li>
-                <li><label>Font size: <input type="number" value="30" id="fontSize" class="num">px</label></li>
-                <li><label><input type="radio" name="labels" value="numbers" class="labels" checked>Numbers</label></li>
-                <li><label><input type="number" value="1" class="num" id="labelsFirstNumber">First number</label></li>
-                <li><label><input type="radio" name="labels" value="alphabet" class="labels">Alphabet</label></li>
-                <li><label><input type="text" value="A" class="num" id="labelsFirstLetter">First letter</label></li>
-                <li><hr></li>
-                <li><button id="draw">Generate</button></li>
-                <li><hr></li>
-            </ul>
-            <div class="imageThumbnails"></div>
-        </div>
-        <div id="page" class="page">
+<body>
+<div class="mainMenu">
+    <ul class="menu">
+        <li>Add some images to create grid</li>
+        <li>
+            <hr>
+        </li>
+        <li><input type="file" name="images" id="files" multiple></li>
+        <li>
+            <hr>
+        </li>
+        <li><label><input type="radio" name="size" id="singe" checked>Size of single image</label></li>
+        <li><label><input type="radio" name="size" id="all">Size of result image</label></li>
+        <li><input type="number" value="300" id="sizeX" class="num">px x <input type="number" value="300" id="sizeY"
+                                                                                class="num">px
+        </li>
+        <li>
+            <hr>
+        </li>
+        <li><label>Columns: <input type="number" value="3" id="cols" class="num"></label></li>
+        <li>
+            <hr>
+        </li>
+        <li><label><input type="radio" name="imageDeform" value="fit" class="imageDeform" checked>Fit in</label></li>
+        <li><label><input type="radio" name="imageDeform" value="deform" class="imageDeform">Deform (stretch)</label>
+        </li>
+        <li><label><input type="radio" name="imageDeform" value="crop" class="imageDeform">Crop (remove
+            overflow)</label></li>
+        <li>
+            <hr>
+        </li>
+        <li>
+            <label>Background color: <input type="color" id="color" value='#FBFBE7'></label>
+        </li>
+        <li>
+            <hr>
+        </li>
+        <li><label><input type="checkbox" id="labelsToggle" checked>Labels</label></li>
+        <li><label>Font size: <input type="number" value="30" id="fontSize" class="num">px</label></li>
+        <li><label><input type="radio" name="labels" value="numbers" class="labels" checked>Numbers</label></li>
+        <li><label><input type="number" value="1" class="num" id="labelsFirstNumber">First number</label></li>
+        <li><label><input type="radio" name="labels" value="alphabet" class="labels">Alphabet</label></li>
+        <li><label><input type="text" value="A" class="num" id="labelsFirstLetter">First letter</label></li>
+        <li>
+            <hr>
+        </li>
+        <li>
+        <li>
+            <button id="draw">Generate</button>
+        </li>
+        </li>
+        <li>
+            <hr>
+        </li>
+    </ul>
+    <div class="imageThumbnails"></div>
+</div>
+<div id="page" class="page">
 
-        </div>
-        <script src="./js/ImageMesh.js"></script>
-        <script src="./js/ImageUpload.js"></script>
-        <script src="./js/Draw.js"></script>
-        <script src="./js/Labels.js"></script>
+</div>
+<script src="./js/ImageMesh.js"></script>
+<script src="./js/ImageUpload.js"></script>
+<script src="./js/Draw.js"></script>
+<script src="./js/Labels.js"></script>
 
-        <script type="text/javascript">ImageMesh.Start();</script>
-    </body>
+<script type="text/javascript">ImageMesh.Start();</script>
+</body>
 </html>
