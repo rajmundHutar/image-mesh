@@ -27,8 +27,17 @@ Draw.all = function () {
 
 };
 
-Draw.saveImageAsPng = function(){
-    window.open(this._context.canvas.toDataURL('image/png'));
+Draw.saveImageAsPng = function () {
+    // Convert the canvas to data
+    var image = this._context.canvas.toDataURL();
+    // Create a link
+    var aDownloadLink = document.createElement('a');
+    // Add the name of the file to the link
+    aDownloadLink.download = 'image_mesh.png';
+    // Attach the data to the link
+    aDownloadLink.href = image;
+    // Get the code to click the download link
+    aDownloadLink.click();
 };
 
 Draw._images = function () {
